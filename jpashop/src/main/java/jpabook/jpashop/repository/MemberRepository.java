@@ -19,7 +19,7 @@ public class MemberRepository {
     //그러니깐 원래는 PersistenceContext 로만 주입 할 수 있는데 스프링데이터jpa가 Autowired로 주입이 가능하게 해주기에 이런식으로 코드 작성이 가능해진다.
 
     public void save(Member member) {
-        em.persist(member); // 영속성 컨텐츠에 멤버 주
+        em.persist(member); // 영속성 컨텐츠에 멤버 주입
     }
 
     public Member findOne(Long id) { // -> 이렇게 하면 주입된 매니저가 멤버의 아이디를 보고 찾아서 리턴해준다.
