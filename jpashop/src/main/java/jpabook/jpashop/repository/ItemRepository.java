@@ -18,7 +18,10 @@ public class ItemRepository {
         if (item.getId() == null) {
             em.persist(item);
         } else {
-            em.merge(item); // like update
+            em.merge(item);
+            // 병합은 준영속 상태의 엔티티를 영속 상태로 변경할 때 사용하는 기능이다.
+            // merge 하는 방법인데 이것은 이제
+            // ItemService 에서 만든 updateItem 을 그냥 해주는 역할이다.
         }
     }
 

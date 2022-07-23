@@ -1,6 +1,7 @@
 package jpabook.jpashop.service;
 
 
+import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,17 @@ public class ItemService {
     @Transactional
     public void saveItem(Item item) {
         itemRepository.save(item);
+    }
+
+    @Transactional
+    public void updateItem(Long itemId, String name, int Price, int StockQuantity) { // 변경 감지 기능 사용 merge보다 좋은 방법.
+        Item findItem = itemRepository.findOne(itemId);
+        //영속 상태를 가져온거라 셋팅이 끝나면 애노테이션에 의해 변경이 감지되어 commit이 진행된다.
+        findItem.setName(name);
+        findItem.setPrice(Price);
+        findItem.setStockQuantity(StockQuantity);
+        // merge? save? 호출할 필요가 없다 이유는 위에 주석
+        // setter를 안쓰는 방향으로 개발하는게 훨씬 좋다.
     }
 
     public List<Item> findItems(){
